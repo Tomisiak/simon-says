@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">SimonSays</string>
+    <string name="instructions_activity_title">Game instructions</string>
+    <string name="game_activity_title">Game Activity</string>
+    <string name="language_activity_title">Choose language</string>
+    <string name="successful_language_change">Language was successfully changed to English</string>
+</resources>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SimonSays</string>
+    <string name="game_activity_title">Ekran gry z poleceniami do zapamiętania</string>
+    <string name="instructions_activity_title">Słowna instrukcja gry</string>
+    <string name="language_activity_title">Wybierz język</string>
+    <string name="successful_language_change">Udało się zmienić język na polski</string>
+</resources>
