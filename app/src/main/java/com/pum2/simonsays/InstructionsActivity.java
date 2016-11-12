@@ -22,22 +22,18 @@ import java.util.Locale;
 
 public class InstructionsActivity extends AppCompatActivity {
     private TextToSpeech mTextToSpeech;
-    private TextView mTitleTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instructions);
 
-        mTitleTextView = (TextView) findViewById(R.id.textView);
-        mTitleTextView.setText(R.string.instructions_activity_title);
-
         mTextToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
                 if (status != TextToSpeech.ERROR) {
                     mTextToSpeech.setLanguage(new Locale(LocaleManager.getLanguage(InstructionsActivity.this)));
-                    String toSpeak = getResources().getString(R.string.instructions_activity_title);
+                    String toSpeak = getResources().getString(R.string.instructions_title);
                     mTextToSpeech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
                 }
             }
@@ -46,8 +42,8 @@ public class InstructionsActivity extends AppCompatActivity {
         ViewGroup layout = (ViewGroup) findViewById(R.id.activity_instructions);
         layout.setOnTouchListener(new OnSwipeTouchListener(InstructionsActivity.this) {
             public void onSwipeRight() {
-                Intent intent = new Intent(InstructionsActivity.this, MainActivity.class);
-                startActivity(intent);
+                mTextToSpeech.stop();
+                finish();
             }
         });
     }

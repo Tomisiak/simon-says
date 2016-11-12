@@ -7,13 +7,27 @@
     tools:context=".GameActivity">
 
     <TextView
-        android:text="TextView"
+        android:text="@string/game_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="192dp"
-        android:id="@+id/textView2"
-        tools:text="@string/game_activity_title"
+        android:id="@+id/game_title"
         android:textAlignment="center"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp" />
+
+    <TextView
+        android:text="@string/app_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2"
+        android:background="@color/colorPrimary"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"
+        android:textAlignment="center"
+        android:padding="5sp"
+        android:textAllCaps="true"
+        android:layout_marginTop="17dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

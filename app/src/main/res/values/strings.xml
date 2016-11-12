@@ -1,7 +1,13 @@
 <resources>
     <string name="app_name">SimonSays</string>
-    <string name="instructions_activity_title">Game instructions</string>
-    <string name="game_activity_title">Game Activity</string>
-    <string name="language_activity_title">Choose language</string>
-    <string name="successful_language_change">Language was successfully changed to English</string>
+    <string name="instructions_title">Game instructions</string>
+    <string name="game_title">Game Activity</string>
+    <string name="language_title">Choose language</string>
+    <string name="language_successful_change">Language was successfully changed to English</string>
+    <string name="main_exit">Exit</string>
+    <string name="main_instructions">Instructions</string>
+    <string name="main_play">Play</string>
+    <string name="main_language">Language</string>
+    <string name="language_change">Change to Polish</string>
+    <string name="app_back">Back</string>
 </resources>

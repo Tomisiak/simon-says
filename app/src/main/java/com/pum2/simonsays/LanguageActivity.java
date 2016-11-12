@@ -21,21 +21,24 @@ import java.util.Locale;
 public class LanguageActivity extends AppCompatActivity {
     TextToSpeech mTextToSpeech;
     TextView mTitleTextView;
+    TextView mChangeTextView;
+    TextView mBackTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_language);
 
-        mTitleTextView = (TextView) findViewById(R.id.textView3);
-        mTitleTextView.setText(R.string.language_activity_title);
+        mTitleTextView = (TextView) findViewById(R.id.language_title);
+        mChangeTextView = (TextView) findViewById(R.id.language_change);
+        mBackTextView = (TextView) findViewById(R.id.language_back);
 
         mTextToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
                 if (status != TextToSpeech.ERROR) {
                     mTextToSpeech.setLanguage(new Locale(LocaleManager.getLanguage(LanguageActivity.this)));
-                    String toSpeak = getResources().getString(R.string.language_activity_title);
+                    String toSpeak = getResources().getString(R.string.language_title);
                     mTextToSpeech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
                 }
             }
@@ -44,8 +47,8 @@ public class LanguageActivity extends AppCompatActivity {
         ViewGroup layout = (ViewGroup) findViewById(R.id.activity_language);
         layout.setOnTouchListener(new OnSwipeTouchListener(LanguageActivity.this) {
             public void onSwipeLeft() {
-                Intent intent = new Intent(LanguageActivity.this, MainActivity.class);
-                startActivity(intent);
+                mTextToSpeech.stop();
+                finish();
             }
 
             public void onSwipeTop() {
@@ -56,7 +59,7 @@ public class LanguageActivity extends AppCompatActivity {
                 }
 
                 mTextToSpeech.setLanguage(new Locale(LocaleManager.getLanguage(LanguageActivity.this)));
-                String toSpeak = getResources().getString(R.string.successful_language_change);
+                String toSpeak = getResources().getString(R.string.language_successful_change);
                 mTextToSpeech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
                 updateView();
             }
@@ -64,6 +67,8 @@ public class LanguageActivity extends AppCompatActivity {
     }
 
     private void updateView() {
-        mTitleTextView.setText(R.string.language_activity_title);
+        mTitleTextView.setText(R.string.language_title);
+        mChangeTextView.setText(R.string.language_change);
+        mBackTextView.setText(R.string.app_back);
     }
 }

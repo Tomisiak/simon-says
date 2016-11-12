@@ -7,12 +7,28 @@
     tools:context="com.pum2.simonsays.InstructionsActivity">
 
     <TextView
-        android:text="TextView"
+        android:text="@string/instructions_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView"
-        tools:text="@string/instructions_activity_title"
-        android:layout_alignParentTop="true"
+        android:id="@+id/instructions_title"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="222dp" />
+        android:textSize="20sp" />
+
+    <TextView
+        android:text="@string/app_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/instructions_back"
+        android:background="@color/colorPrimary"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"
+        android:textAlignment="center"
+        android:padding="5sp"
+        android:rotation="-90"
+        android:textAllCaps="true"
+        android:layout_alignBaseline="@+id/instructions_title"
+        android:layout_alignBottom="@+id/instructions_title"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>
