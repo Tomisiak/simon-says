@@ -10,4 +10,5 @@
     <string name="main_language">Language</string>
     <string name="language_change">Change to Polish</string>
     <string name="app_back">Back</string>
+    <string name="gesture_long_press_back">Long press to leave</string>
 </resources>
