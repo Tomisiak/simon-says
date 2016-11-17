@@ -11,4 +11,5 @@
     <string name="main_language">Język</string>
     <string name="language_change">Zmień na angielski</string>
     <string name="app_back">Powrót</string>
+    <string name="gesture_long_press_back">Przytrzymaj aby wyjść</string>
 </resources>
