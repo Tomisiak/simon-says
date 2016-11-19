@@ -1,6 +1,7 @@
 package com.pum2.simonsays.game;
 
 import com.pum2.simonsays.events.EventDispatcher;
+import com.pum2.simonsays.events.IEventHandler;
 import com.pum2.simonsays.gesture.Type;
 
 /**
@@ -16,10 +17,10 @@ public class GestureDispatcher extends EventDispatcher {
     private GestureDispatcher() {
     }
 
-    public void detectGestures() {
-        addEventListener(Type.SWIPE_LEFT, new GestureHandler());
-        addEventListener(Type.SWIPE_RIGHT, new GestureHandler());
-        addEventListener(Type.SWIPE_UP, new GestureHandler());
-        addEventListener(Type.SWIPE_DOWN, new GestureHandler());
+    public void detectGestures(IEventHandler handler) {
+        addEventListener(Type.SWIPE_LEFT, handler);
+        addEventListener(Type.SWIPE_RIGHT, handler);
+        addEventListener(Type.SWIPE_UP, handler);
+        addEventListener(Type.SWIPE_DOWN, handler);
     }
 }

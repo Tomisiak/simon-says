@@ -4,16 +4,19 @@ import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MotionEvent;
 
 import com.pum2.simonsays.events.Event;
 import com.pum2.simonsays.game.Game;
+import com.pum2.simonsays.game.GestureHandler;
 import com.pum2.simonsays.gesture.Gesture;
 import com.pum2.simonsays.gesture.GestureList;
 import com.pum2.simonsays.gesture.GestureListGenerator;
 import com.pum2.simonsays.gesture.GestureListener;
 import com.pum2.simonsays.game.GestureDispatcher;
 
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -26,7 +29,7 @@ public class GameActivity extends AppCompatActivity {
     private GestureDispatcher gestureDispatcher;
 
 
-    private static final String DEBUG_TAG = "Gestures";
+    private static final String DEBUG_TAG = "Game";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +49,14 @@ public class GameActivity extends AppCompatActivity {
             }
         });
 
+        Game game = Game.getInstance(2);
+
         mDetector = new GestureDetectorCompat(GameActivity.this, new LocalGestureListener());
         mDetector.setIsLongpressEnabled(true);
-        gestureDispatcher = GestureDispatcher.getInstance();
-        gestureDispatcher.detectGestures();
 
-        GestureList<Gesture> gestureList = GestureListGenerator.generateList(5);
-        Game game = Game.getInstance(10);
+        GestureHandler gestureHandler = new GestureHandler(game);
+        gestureDispatcher             = GestureDispatcher.getInstance();
+        gestureDispatcher.detectGestures(gestureHandler);
     }
 
     @Override
