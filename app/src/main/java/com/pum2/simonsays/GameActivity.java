@@ -4,10 +4,15 @@ import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.GestureDetector;
 import android.view.MotionEvent;
-import android.view.ViewGroup;
+
+import com.pum2.simonsays.events.Event;
+import com.pum2.simonsays.game.Game;
+import com.pum2.simonsays.gesture.Gesture;
+import com.pum2.simonsays.gesture.GestureList;
+import com.pum2.simonsays.gesture.GestureListGenerator;
+import com.pum2.simonsays.gesture.GestureListener;
+import com.pum2.simonsays.game.GestureDispatcher;
 
 import java.util.Locale;
 
@@ -18,6 +23,8 @@ import java.util.Locale;
 public class GameActivity extends AppCompatActivity {
     private TextToSpeech mTextToSpeech;
     private GestureDetectorCompat mDetector;
+    private GestureDispatcher gestureDispatcher;
+
 
     private static final String DEBUG_TAG = "Gestures";
 
@@ -33,36 +40,39 @@ public class GameActivity extends AppCompatActivity {
                     mTextToSpeech.setLanguage(new Locale(LocaleManager.getLanguage(GameActivity.this)));
                     String toSpeak = getResources().getString(R.string.game_title);
                     mTextToSpeech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
+                    toSpeak = getResources().getString(R.string.gesture_long_press_back);
+                    mTextToSpeech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
                 }
             }
         });
 
-        mDetector = new GestureDetectorCompat(GameActivity.this, new MyGestureListener());
+        mDetector = new GestureDetectorCompat(GameActivity.this, new LocalGestureListener());
         mDetector.setIsLongpressEnabled(true);
+        gestureDispatcher = GestureDispatcher.getInstance();
+        gestureDispatcher.detectGestures();
+
+        GestureList<Gesture> gestureList = GestureListGenerator.generateList(5);
+        Game game = Game.getInstance(10);
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event){
+    public boolean onTouchEvent(MotionEvent event) {
         this.mDetector.onTouchEvent(event);
-        // Be sure to call the superclass implementation
+
         return super.onTouchEvent(event);
     }
 
-    public class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
-        @Override
-        public boolean onDown(MotionEvent event) {
-            return true;
-        }
-
+    public class LocalGestureListener extends GestureListener {
 
         @Override
         public void onLongPress(MotionEvent event) {
-            Log.e("", "onLongPress: X=" + String.valueOf(event.getX()) + ", Y=" + String.valueOf(event.getY()));
-
             mTextToSpeech.stop();
             finish();
         }
 
-
+        @Override
+        public void dispatchEvent(Event event) {
+            gestureDispatcher.dispatchEvent(event);
+        }
     }
 }
