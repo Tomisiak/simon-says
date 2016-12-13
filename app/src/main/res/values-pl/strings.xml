@@ -12,4 +12,17 @@
     <string name="language_change">Zmień na angielski</string>
     <string name="app_back">Powrót</string>
     <string name="gesture_long_press_back">Przytrzymaj aby wyjść</string>
+    <string name="gesture_swipe_left">Lewo</string>
+    <string name="gesture_swipe_right">Prawo</string>
+    <string name="gesture_swipe_up">Góra</string>
+    <string name="gesture_swipe_down">Dół</string>
+    <string name="game_new_game_started">Za chwilę rozpocznie się nowa gra</string>
+    <string name="game_levels_count">poziomów</string>
+    <string name="game_level">poziom</string>
+    <string name="game_repeat">powtórz</string>
+    <string name="game_correct">dobrze</string>
+    <string name="game_won">wygrałeś</string>
+    <string name="game_fail">przegrałeś, spróbuj ponownie</string>
+    <string name="game_exit">Do zobaczenia!</string>
+    <string name="main_hello_message">Witaj. Znajdujesz się w ekranie głównym. Użyj gestów do nawigacji. Przesuń w lewo aby posłuchać instrukcji gry. W prawo aby zmienić język. W dół aby rozpocząć grę. W górę aby wyjść z aplikacji.</string>
 </resources>

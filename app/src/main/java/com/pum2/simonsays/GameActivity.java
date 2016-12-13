@@ -5,10 +5,19 @@ import android.speech.tts.TextToSpeech;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.GestureDetector;
 import android.view.MotionEvent;
-import android.view.ViewGroup;
 
+import com.pum2.simonsays.events.Event;
+import com.pum2.simonsays.game.Game;
+import com.pum2.simonsays.game.GestureHandler;
+import com.pum2.simonsays.gesture.Gesture;
+import com.pum2.simonsays.gesture.GestureList;
+import com.pum2.simonsays.gesture.GestureListGenerator;
+import com.pum2.simonsays.gesture.GestureListener;
+import com.pum2.simonsays.game.GestureDispatcher;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -18,51 +27,85 @@ import java.util.Locale;
 public class GameActivity extends AppCompatActivity {
     private TextToSpeech mTextToSpeech;
     private GestureDetectorCompat mDetector;
+    private GestureDispatcher gestureDispatcher;
 
-    private static final String DEBUG_TAG = "Gestures";
+    private Game game;
+
+    private static final String DEBUG_TAG = "Game";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        Integer levelSize = 100;
+
+        game = Game.getInstance(getApplicationContext(), levelSize);
+
+
         mTextToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
                 if (status != TextToSpeech.ERROR) {
                     mTextToSpeech.setLanguage(new Locale(LocaleManager.getLanguage(GameActivity.this)));
-                    String toSpeak = getResources().getString(R.string.game_title);
-                    mTextToSpeech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
+                    ArrayList<String> toSpeak = new ArrayList<String>();
+                    toSpeak.add(getResources().getString(R.string.game_title));
+                    toSpeak.add(getResources().getString(R.string.gesture_long_press_back));
+
+                    for (String text : toSpeak) {
+                        mTextToSpeech.speak(text, TextToSpeech.QUEUE_ADD, null);
+                    }
+                    game.setTextToSpeech(mTextToSpeech);
+                    game.reset();
+                    game.getSpeaker().gesturesToRepeat(game.getCurrentLevel(), game.getGesturesToRepeat());
                 }
             }
         });
 
-        mDetector = new GestureDetectorCompat(GameActivity.this, new MyGestureListener());
+        mDetector = new GestureDetectorCompat(GameActivity.this, new LocalGestureListener());
         mDetector.setIsLongpressEnabled(true);
+
+        GestureHandler gestureHandler = new GestureHandler(game);
+        gestureDispatcher = GestureDispatcher.getInstance();
+        gestureDispatcher.detectGestures(gestureHandler);
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event){
+    public boolean onTouchEvent(MotionEvent event) {
         this.mDetector.onTouchEvent(event);
-        // Be sure to call the superclass implementation
+
         return super.onTouchEvent(event);
     }
 
-    public class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
-        @Override
-        public boolean onDown(MotionEvent event) {
-            return true;
+    @Override
+    protected void onDestroy() {
+        if (mTextToSpeech != null) {
+            mTextToSpeech.stop();
+            mTextToSpeech = null;
         }
 
+        super.onDestroy();
+    }
+
+    public class LocalGestureListener extends GestureListener {
 
         @Override
         public void onLongPress(MotionEvent event) {
-            Log.e("", "onLongPress: X=" + String.valueOf(event.getX()) + ", Y=" + String.valueOf(event.getY()));
-
             mTextToSpeech.stop();
+            String text = getResources().getString(R.string.game_exit);
+            mTextToSpeech.speak(text, TextToSpeech.QUEUE_ADD, null);
+            while(mTextToSpeech.isSpeaking())
+            {
+            }
             finish();
         }
 
-
+        @Override
+        public void dispatchEvent(Event event) {
+            if (mTextToSpeech.isSpeaking() == false)
+            {
+                gestureDispatcher.dispatchEvent(event);
+            }
+        }
     }
 }

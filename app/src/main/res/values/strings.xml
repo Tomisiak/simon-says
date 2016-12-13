@@ -11,4 +11,17 @@
     <string name="language_change">Change to Polish</string>
     <string name="app_back">Back</string>
     <string name="gesture_long_press_back">Long press to leave</string>
+    <string name="gesture_swipe_left">Left</string>
+    <string name="gesture_swipe_right">Right</string>
+    <string name="gesture_swipe_up">Up</string>
+    <string name="gesture_swipe_down">Down</string>
+    <string name="game_new_game_started">New game started</string>
+    <string name="game_levels_count">levels</string>
+    <string name="game_level">level</string>
+    <string name="game_repeat">repeat</string>
+    <string name="game_correct">Correct</string>
+    <string name="game_won">You won</string>
+    <string name="game_fail">You failed, try again</string>
+    <string name="game_exit">Bye bye</string>
+    <string name="main_hello_message">Welcome. You are on main screen. Use gestures to navigate. Swipe left to listen game instructions. Swipe right to choose language. Swipe down to start game. Swipe up to leave application.</string>
 </resources>

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
@@ -16,12 +17,33 @@ public class MainActivity extends AppCompatActivity {
     private TextView mInstructionsTextView;
     private TextView mLanguageTextView;
     private TextView mPlayTextView;
+    private TextToSpeech mTextToSpeech;
+
+    protected void initialMessage()
+    {
+        ArrayList<String> toSpeak = new ArrayList<String>();
+        toSpeak.add(getResources().getString(R.string.main_hello_message));
+
+        for (String text : toSpeak) {
+            mTextToSpeech.speak(text, TextToSpeech.QUEUE_ADD, null);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         LocaleManager.onCreate(this, "en");
         setContentView(R.layout.activity_main);
+
+        mTextToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status != TextToSpeech.ERROR) {
+                    mTextToSpeech.setLanguage(new Locale(LocaleManager.getLanguage(MainActivity.this)));
+                    initialMessage();
+                }
+            }
+        });
 
         mExitTextView = (TextView) findViewById(R.id.main_exit);
         mInstructionsTextView = (TextView) findViewById(R.id.main_instructions);
@@ -48,7 +70,21 @@ public class MainActivity extends AppCompatActivity {
             public void onSwipeTop() {
                 MainActivity.this.finish();
             }
+
         });
+    }
+
+    @Override
+    public void startActivity(Intent intent) {
+        mTextToSpeech.stop();
+        super.startActivity(intent);
+    }
+
+    @Override
+    protected void onDestroy() {
+        mTextToSpeech.stop();
+        mTextToSpeech.shutdown();
+        super.onDestroy();
     }
 
     @Override
@@ -58,5 +94,6 @@ public class MainActivity extends AppCompatActivity {
         mInstructionsTextView.setText(R.string.main_instructions);
         mLanguageTextView.setText(R.string.main_language);
         mPlayTextView.setText(R.string.main_play);
+        initialMessage();
     }
 }
