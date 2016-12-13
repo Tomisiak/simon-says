@@ -1,5 +1,7 @@
 package com.pum2.simonsays.gesture;
 
+import com.pum2.simonsays.R;
+
 import java.util.ArrayList;
 
 /**
@@ -7,19 +9,19 @@ import java.util.ArrayList;
  */
 
 public enum Type {
-    SWIPE_UP("swipe up"), SWIPE_DOWN("swipe down"), SWIPE_LEFT("swipe left"), SWIPE_RIGHT("swipe right");
+    SWIPE_UP(R.string.gesture_swipe_up),
+    SWIPE_DOWN(R.string.gesture_swipe_down),
+    SWIPE_LEFT(R.string.gesture_swipe_left),
+    SWIPE_RIGHT(R.string.gesture_swipe_right);
 
-    private final String value;
+    private final int resourceId;
 
-    private Type(final String value)
+    private Type(final int resourceId)
     {
-        this.value = value;
+        this.resourceId = resourceId;
     }
 
-    @Override
-    public String toString() {
-        return value;
-    }
+    public int getResourceId() { return resourceId; }
 
     public static ArrayList<Type> getAll()
     {

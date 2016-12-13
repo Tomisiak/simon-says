@@ -2,11 +2,11 @@ package com.pum2.simonsays.game;
 
 import android.util.Log;
 
+
 import com.pum2.simonsays.events.Event;
 import com.pum2.simonsays.events.IEventHandler;
 import com.pum2.simonsays.gesture.Gesture;
 
-import java.util.List;
 
 /**
  * Created by Grego on 19.11.2016.
@@ -19,7 +19,6 @@ public class GestureHandler implements IEventHandler {
     public GestureHandler(Game game)
     {
         this.game = game;
-        this.gesturesToRepeat();
     }
 
     @Override
@@ -32,34 +31,24 @@ public class GestureHandler implements IEventHandler {
         Boolean result = game.resolveGesture(gesture);
         if (result)
         {
-            Log.d(Game.LOG_TAG, "Correct!");
+            game.getSpeaker().correctMove();
             if (game.isFinished())
             {
                 game.reset();
-                Log.d(Game.LOG_TAG, "You WON!");
+                game.getSpeaker().endOfTheGame(true);
             }
 
             if (game.isNewLevel())
             {
-                this.gesturesToRepeat();
+                game.getSpeaker().gesturesToRepeat(game.getCurrentLevel(), game.getGesturesToRepeat());
             }
         }
-        else if (!result)
+        else
         {
+            game.getSpeaker().endOfTheGame(false);
             game.reset();
-            Log.d(Game.LOG_TAG, "You failed");
-            this.gesturesToRepeat();
+            game.getSpeaker().gesturesToRepeat(game.getCurrentLevel(), game.getGesturesToRepeat());
         }
     }
 
-    public void gesturesToRepeat()
-    {
-        Log.d(Game.LOG_TAG, "Level: " + game.getCurrentLevel());
-        List<Gesture> listToRepeat = game.getGesturesToRepeat();
-
-        for(Gesture toRepeat : listToRepeat)
-        {
-            Log.d(Game.LOG_TAG, "Repeat: " + toRepeat.getType().toString());
-        }
-    }
 }

@@ -16,6 +16,7 @@ import com.pum2.simonsays.gesture.GestureListGenerator;
 import com.pum2.simonsays.gesture.GestureListener;
 import com.pum2.simonsays.game.GestureDispatcher;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -28,6 +29,7 @@ public class GameActivity extends AppCompatActivity {
     private GestureDetectorCompat mDetector;
     private GestureDispatcher gestureDispatcher;
 
+    private Game game;
 
     private static final String DEBUG_TAG = "Game";
 
@@ -36,26 +38,35 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        Integer levelSize = 100;
+
+        game = Game.getInstance(getApplicationContext(), levelSize);
+
+
         mTextToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
                 if (status != TextToSpeech.ERROR) {
                     mTextToSpeech.setLanguage(new Locale(LocaleManager.getLanguage(GameActivity.this)));
-                    String toSpeak = getResources().getString(R.string.game_title);
-                    mTextToSpeech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
-                    toSpeak = getResources().getString(R.string.gesture_long_press_back);
-                    mTextToSpeech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
+                    ArrayList<String> toSpeak = new ArrayList<String>();
+                    toSpeak.add(getResources().getString(R.string.game_title));
+                    toSpeak.add(getResources().getString(R.string.gesture_long_press_back));
+
+                    for (String text : toSpeak) {
+                        mTextToSpeech.speak(text, TextToSpeech.QUEUE_ADD, null);
+                    }
+                    game.setTextToSpeech(mTextToSpeech);
+                    game.reset();
+                    game.getSpeaker().gesturesToRepeat(game.getCurrentLevel(), game.getGesturesToRepeat());
                 }
             }
         });
-
-        Game game = Game.getInstance(2);
 
         mDetector = new GestureDetectorCompat(GameActivity.this, new LocalGestureListener());
         mDetector.setIsLongpressEnabled(true);
 
         GestureHandler gestureHandler = new GestureHandler(game);
-        gestureDispatcher             = GestureDispatcher.getInstance();
+        gestureDispatcher = GestureDispatcher.getInstance();
         gestureDispatcher.detectGestures(gestureHandler);
     }
 
@@ -66,17 +77,35 @@ public class GameActivity extends AppCompatActivity {
         return super.onTouchEvent(event);
     }
 
+    @Override
+    protected void onDestroy() {
+        if (mTextToSpeech != null) {
+            mTextToSpeech.stop();
+            mTextToSpeech = null;
+        }
+
+        super.onDestroy();
+    }
+
     public class LocalGestureListener extends GestureListener {
 
         @Override
         public void onLongPress(MotionEvent event) {
             mTextToSpeech.stop();
+            String text = getResources().getString(R.string.game_exit);
+            mTextToSpeech.speak(text, TextToSpeech.QUEUE_ADD, null);
+            while(mTextToSpeech.isSpeaking())
+            {
+            }
             finish();
         }
 
         @Override
         public void dispatchEvent(Event event) {
-            gestureDispatcher.dispatchEvent(event);
+            if (mTextToSpeech.isSpeaking() == false)
+            {
+                gestureDispatcher.dispatchEvent(event);
+            }
         }
     }
 }

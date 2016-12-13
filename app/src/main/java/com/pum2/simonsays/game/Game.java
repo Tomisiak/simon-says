@@ -1,13 +1,15 @@
 package com.pum2.simonsays.game;
 
-import android.support.annotation.Nullable;
+
+import android.content.Context;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 
 import com.pum2.simonsays.gesture.Gesture;
 import com.pum2.simonsays.gesture.GestureList;
 import com.pum2.simonsays.gesture.GestureListGenerator;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 /**
@@ -18,20 +20,29 @@ public class Game {
     private GestureList<Gesture> gestureList;
     private Integer currentLevel;
     private Integer gestureNo;
+    private Speaker speaker;
 
     public static String LOG_TAG = "Game";
 
-    public Game(GestureList<Gesture> gestureList) {
+    private Game(Context context, GestureList<Gesture> gestureList) {
         this.gestureList = gestureList;
         currentLevel = 1;
         gestureNo = 0;
+        speaker = new Speaker(context);
     }
 
-    public static Game getInstance(Integer levelSize) {
+    public void setTextToSpeech(TextToSpeech mTextToSpeech) {
+        this.speaker.setTts(mTextToSpeech);
+    }
+
+    public Speaker getSpeaker() {
+        return speaker;
+    }
+
+    public static Game getInstance(Context context, Integer levelSize) {
         if (ourInstance == null)
         {
-            ourInstance = new Game(GestureListGenerator.generateList(levelSize));
-            Log.d(Game.LOG_TAG, "New game started. " + levelSize.toString() + " levels");
+            ourInstance = new Game(context, GestureListGenerator.generateList(levelSize));
         }
 
         return ourInstance;
@@ -41,6 +52,7 @@ public class Game {
     {
         return gestureList.subList(0, currentLevel);
     }
+
 
     public Boolean resolveGesture(Gesture gesture)
     {
@@ -76,9 +88,12 @@ public class Game {
         gestureList = GestureListGenerator.generateList(gestureList.size());
         currentLevel = 1;
         gestureNo = 0;
+        speaker.initialMessage(gestureList.size());
     }
 
     public Integer getCurrentLevel() {
         return currentLevel;
     }
+
+
 }
