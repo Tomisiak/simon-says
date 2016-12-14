@@ -4,20 +4,15 @@ import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MotionEvent;
 
 import com.pum2.simonsays.events.Event;
 import com.pum2.simonsays.game.Game;
 import com.pum2.simonsays.game.GestureHandler;
-import com.pum2.simonsays.gesture.Gesture;
-import com.pum2.simonsays.gesture.GestureList;
-import com.pum2.simonsays.gesture.GestureListGenerator;
 import com.pum2.simonsays.gesture.GestureListener;
 import com.pum2.simonsays.game.GestureDispatcher;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 /**

@@ -3,7 +3,6 @@ package com.pum2.simonsays.game;
 
 import android.content.Context;
 import android.speech.tts.TextToSpeech;
-import android.util.Log;
 
 import com.pum2.simonsays.gesture.Gesture;
 import com.pum2.simonsays.gesture.GestureList;
