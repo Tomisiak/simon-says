@@ -1,5 +1,6 @@
 package com.pum2.simonsays;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.view.GestureDetectorCompat;
@@ -26,17 +27,17 @@ public class GameActivity extends AppCompatActivity {
 
     private Game game;
 
-    private static final String DEBUG_TAG = "Game";
+    public static final String GAME_SETTING = "gameSettings";
+    public static final String DIFFICULTY_LEVEL = "difficultyLevel";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        SharedPreferences settings = getSharedPreferences(GameActivity.GAME_SETTING, 0);
+        Integer difficulty = settings.getInt(GameActivity.DIFFICULTY_LEVEL, 1);
 
-        Integer levelSize = 100;
-
-        game = Game.getInstance(getApplicationContext(), levelSize);
-
+        game = Game.getInstance(getApplicationContext(), difficulty);
 
         mTextToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override

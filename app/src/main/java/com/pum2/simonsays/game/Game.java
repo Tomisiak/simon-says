@@ -6,7 +6,7 @@ import android.speech.tts.TextToSpeech;
 
 import com.pum2.simonsays.gesture.Gesture;
 import com.pum2.simonsays.gesture.GestureList;
-import com.pum2.simonsays.gesture.GestureListGenerator;
+import com.pum2.simonsays.gesture.GestureGenerator;
 
 
 import java.util.List;
@@ -20,11 +20,18 @@ public class Game {
     private Integer currentLevel;
     private Integer gestureNo;
     private Speaker speaker;
+    private GestureGenerator gestureGenerator;
+    private Integer difficulty;
 
     public static String LOG_TAG = "Game";
 
-    private Game(Context context, GestureList<Gesture> gestureList) {
-        this.gestureList = gestureList;
+    public void setDifficulty(Integer difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    private Game(Context context, GestureGenerator gestureGenerator) {
+        gestureList = new GestureList<>();
+        this.gestureGenerator = gestureGenerator;
         currentLevel = 1;
         gestureNo = 0;
         speaker = new Speaker(context);
@@ -38,11 +45,13 @@ public class Game {
         return speaker;
     }
 
-    public static Game getInstance(Context context, Integer levelSize) {
+    public static Game getInstance(Context context, Integer difficulty) {
         if (ourInstance == null)
         {
-            ourInstance = new Game(context, GestureListGenerator.generateList(levelSize));
+            ourInstance = new Game(context, new GestureGenerator());
         }
+
+        ourInstance.setDifficulty(difficulty);
 
         return ourInstance;
     }
@@ -67,6 +76,7 @@ public class Game {
         {
             currentLevel++;
             gestureNo = 0;
+            randNewGesture();
         }
 
         return result;
@@ -84,15 +94,20 @@ public class Game {
 
     public void reset()
     {
-        gestureList = GestureListGenerator.generateList(gestureList.size());
-        currentLevel = 1;
+        Integer listSize = difficulty == 1 ? difficulty : difficulty * 3;
+        gestureList = new GestureList<>();
+        currentLevel = listSize;
         gestureNo = 0;
-        speaker.initialMessage(gestureList.size());
+        speaker.initialMessage();
+        gestureList = gestureGenerator.generateList(listSize);
     }
 
     public Integer getCurrentLevel() {
         return currentLevel;
     }
 
-
+    private void randNewGesture()
+    {
+        gestureList.add(gestureGenerator.generateGesture());
+    }
 }

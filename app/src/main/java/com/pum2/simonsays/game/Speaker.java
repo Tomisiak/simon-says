@@ -33,12 +33,9 @@ public class Speaker {
         return tts;
     }
 
-    public void initialMessage(Integer levelSize)
+    public void initialMessage()
     {
-        String msg = context.getResources().getString(R.string.game_new_game_started)+". "
-                + levelSize.toString() +
-                " "
-                + context.getResources().getString(R.string.game_levels_count);
+        String msg = context.getResources().getString(R.string.game_new_game_started);
         log(msg);
         speech(msg);
     }

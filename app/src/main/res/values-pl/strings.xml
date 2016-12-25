@@ -25,4 +25,10 @@
     <string name="game_fail">przegrałeś, spróbuj ponownie</string>
     <string name="game_exit">Do zobaczenia!</string>
     <string name="main_hello_message">Witaj. Znajdujesz się w ekranie głównym. Użyj gestów do nawigacji. Przesuń w lewo aby posłuchać instrukcji gry. W prawo aby zmienić język. W dół aby rozpocząć grę. W górę aby wyjść z aplikacji.</string>
+    <string name="game_difficulty">Zmieniono poziom trudności na </string>
+    <string name="game_difficulty_begginer">Początkujący</string>
+    <string name="game_difficulty_easy">Łatwy</string>
+    <string name="game_difficulty_medium">Średniozaawansowany</string>
+    <string name="game_difficulty_high">Trudny</string>
+    <string name="change_difficulty">Zmień poziom trudności</string>
 </resources>
