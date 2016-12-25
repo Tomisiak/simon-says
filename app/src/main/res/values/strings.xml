@@ -24,4 +24,10 @@
     <string name="game_fail">You failed, try again</string>
     <string name="game_exit">Bye bye</string>
     <string name="main_hello_message">Welcome. You are on main screen. Use gestures to navigate. Swipe left to listen game instructions. Swipe right to choose language. Swipe down to start game. Swipe up to leave application.</string>
+    <string name="game_difficulty">Game difficulty changed to</string>
+    <string name="game_difficulty_begginer">Beginner</string>
+    <string name="game_difficulty_easy">Easy</string>
+    <string name="game_difficulty_medium">Medium</string>
+    <string name="game_difficulty_high">High</string>
+    <string name="change_difficulty">Change game difficulty</string>
 </resources>

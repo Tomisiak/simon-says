@@ -7,6 +7,20 @@
     tools:context=".LanguageActivity">
 
     <TextView
+        android:text="@string/language_change"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/language_change"
+        android:background="@color/colorPrimary"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"
+        android:textAlignment="center"
+        android:padding="5sp"
+        android:layout_marginTop="18dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
         android:text="@string/language_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,16 +46,16 @@
         android:textAllCaps="true" />
 
     <TextView
-        android:text="@string/language_change"
+        android:text="@string/change_difficulty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/language_change"
+        android:id="@+id/change_difficulty"
         android:background="@color/colorPrimary"
         android:textSize="20sp"
         android:textColor="@android:color/white"
         android:textAlignment="center"
         android:padding="5sp"
-        android:layout_marginTop="18dp"
-        android:layout_alignParentTop="true"
+        android:layout_marginBottom="30dp"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

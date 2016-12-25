@@ -1,23 +1,19 @@
 package com.pum2.simonsays;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MotionEvent;
 
 import com.pum2.simonsays.events.Event;
 import com.pum2.simonsays.game.Game;
 import com.pum2.simonsays.game.GestureHandler;
-import com.pum2.simonsays.gesture.Gesture;
-import com.pum2.simonsays.gesture.GestureList;
-import com.pum2.simonsays.gesture.GestureListGenerator;
 import com.pum2.simonsays.gesture.GestureListener;
 import com.pum2.simonsays.game.GestureDispatcher;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 /**
@@ -31,17 +27,17 @@ public class GameActivity extends AppCompatActivity {
 
     private Game game;
 
-    private static final String DEBUG_TAG = "Game";
+    public static final String GAME_SETTING = "gameSettings";
+    public static final String DIFFICULTY_LEVEL = "difficultyLevel";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        SharedPreferences settings = getSharedPreferences(GameActivity.GAME_SETTING, 0);
+        Integer difficulty = settings.getInt(GameActivity.DIFFICULTY_LEVEL, 1);
 
-        Integer levelSize = 100;
-
-        game = Game.getInstance(getApplicationContext(), levelSize);
-
+        game = Game.getInstance(getApplicationContext(), difficulty);
 
         mTextToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
