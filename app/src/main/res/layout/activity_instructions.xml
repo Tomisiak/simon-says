@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/activity_instructions"
+    android:background="@color/colorBackground"
     tools:context="com.pum2.simonsays.InstructionsActivity">
 
     <TextView
