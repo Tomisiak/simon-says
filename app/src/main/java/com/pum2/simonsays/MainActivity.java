@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -15,7 +13,7 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
     private TextView mExitTextView;
     private TextView mInstructionsTextView;
-    private TextView mLanguageTextView;
+    private TextView mSettingsTextView;
     private TextView mPlayTextView;
     private TextToSpeech mTextToSpeech;
 
@@ -47,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         mExitTextView = (TextView) findViewById(R.id.main_exit);
         mInstructionsTextView = (TextView) findViewById(R.id.main_instructions);
-        mLanguageTextView = (TextView) findViewById(R.id.main_language);
+        mSettingsTextView = (TextView) findViewById(R.id.main_settings);
         mPlayTextView = (TextView) findViewById(R.id.main_play);
 
         ViewGroup layout = (ViewGroup) findViewById(R.id.activity_main);
@@ -58,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             public void onSwipeRight() {
-                Intent intent = new Intent(MainActivity.this, LanguageActivity.class);
+                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
                 startActivity(intent);
             }
 
@@ -90,9 +88,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        mTextToSpeech.setLanguage(new Locale(LocaleManager.getLanguage(MainActivity.this)));
         mExitTextView.setText(R.string.main_exit);
         mInstructionsTextView.setText(R.string.main_instructions);
-        mLanguageTextView.setText(R.string.main_language);
+        mSettingsTextView.setText(R.string.main_settings);
         mPlayTextView.setText(R.string.main_play);
         initialMessage();
     }
