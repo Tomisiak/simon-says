@@ -31,4 +31,19 @@
         android:layout_alignBottom="@+id/instructions_title"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="@string/listen_instructions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listen_instructions"
+        android:background="@color/colorPrimary"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"
+        android:textAlignment="center"
+        android:padding="5sp"
+        android:layout_marginBottom="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textAllCaps="true" />
 </RelativeLayout>
