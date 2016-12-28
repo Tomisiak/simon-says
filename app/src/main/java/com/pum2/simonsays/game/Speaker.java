@@ -9,6 +9,7 @@ import com.pum2.simonsays.R;
 import com.pum2.simonsays.gesture.Gesture;
 
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by Grego on 11.12.2016.
