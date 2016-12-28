@@ -1,19 +1,12 @@
 package com.pum2.simonsays;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
-import android.content.res.Resources;
-import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import com.pum2.simonsays.game.Game;
 
 import java.util.Locale;
 
@@ -21,11 +14,12 @@ import java.util.Locale;
  * Created by Michal on 2016-11-11.
  */
 
-public class LanguageActivity extends AppCompatActivity {
+public class SettingsActivity extends AppCompatActivity {
     TextToSpeech mTextToSpeech;
     TextView mTitleTextView;
     TextView mChangeTextView;
     TextView mBackTextView;
+    TextView mGameDifficultyTextView;
 
     public static String LOG_TAG = "OPTIONS";
 
@@ -33,38 +27,39 @@ public class LanguageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_language);
+        setContentView(R.layout.activity_settings);
 
         mTitleTextView = (TextView) findViewById(R.id.language_title);
         mChangeTextView = (TextView) findViewById(R.id.language_change);
         mBackTextView = (TextView) findViewById(R.id.language_back);
+        mGameDifficultyTextView = (TextView) findViewById(R.id.change_difficulty);
 
         mTextToSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
                 if (status != TextToSpeech.ERROR) {
-                    mTextToSpeech.setLanguage(new Locale(LocaleManager.getLanguage(LanguageActivity.this)));
+                    mTextToSpeech.setLanguage(new Locale(LocaleManager.getLanguage(SettingsActivity.this)));
                     String toSpeak = getResources().getString(R.string.language_title);
                     mTextToSpeech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
                 }
             }
         });
 
-        ViewGroup layout = (ViewGroup) findViewById(R.id.activity_language);
-        layout.setOnTouchListener(new OnSwipeTouchListener(LanguageActivity.this) {
+        ViewGroup layout = (ViewGroup) findViewById(R.id.activity_settings);
+        layout.setOnTouchListener(new OnSwipeTouchListener(SettingsActivity.this) {
             public void onSwipeLeft() {
                 mTextToSpeech.stop();
                 finish();
             }
 
             public void onSwipeTop() {
-                if ("pl".equals(LocaleManager.getLanguage(LanguageActivity.this))) {
-                    LocaleManager.setLocale(LanguageActivity.this, "en");
+                if ("pl".equals(LocaleManager.getLanguage(SettingsActivity.this))) {
+                    LocaleManager.setLocale(SettingsActivity.this, "en");
                 } else {
-                    LocaleManager.setLocale(LanguageActivity.this, "pl");
+                    LocaleManager.setLocale(SettingsActivity.this, "pl");
                 }
 
-                mTextToSpeech.setLanguage(new Locale(LocaleManager.getLanguage(LanguageActivity.this)));
+                mTextToSpeech.setLanguage(new Locale(LocaleManager.getLanguage(SettingsActivity.this)));
                 String toSpeak = getResources().getString(R.string.language_successful_change);
                 mTextToSpeech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
                 updateView();
@@ -78,7 +73,7 @@ public class LanguageActivity extends AppCompatActivity {
                 editor.putInt(GameActivity.DIFFICULTY_LEVEL, newLevel);
                 editor.commit();
 
-                Log.d(LanguageActivity.LOG_TAG, "Game difficulty changed to: " + newLevel);
+                Log.d(SettingsActivity.LOG_TAG, "Game difficulty changed to: " + newLevel);
                 String lvlText = getResources().getString(R.string.game_difficulty_begginer);
                 switch (newLevel) {
                     case 1:
@@ -104,5 +99,6 @@ public class LanguageActivity extends AppCompatActivity {
         mTitleTextView.setText(R.string.language_title);
         mChangeTextView.setText(R.string.language_change);
         mBackTextView.setText(R.string.app_back);
+        mGameDifficultyTextView.setText(R.string.change_difficulty);
     }
 }

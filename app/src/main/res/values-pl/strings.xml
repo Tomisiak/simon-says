@@ -8,7 +8,7 @@
     <string name="main_exit">Wyjście</string>
     <string name="main_instructions">Instrukcja</string>
     <string name="main_play">Graj</string>
-    <string name="main_language">Język</string>
+    <string name="main_settings">Ustawienia</string>
     <string name="language_change">Zmień na angielski</string>
     <string name="app_back">Powrót</string>
     <string name="gesture_long_press_back">Przytrzymaj aby wyjść</string>

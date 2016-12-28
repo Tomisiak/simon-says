@@ -11,9 +11,9 @@
     tools:context="com.pum2.simonsays.MainActivity">
 
     <TextView
-        android:text="@string/main_language"
+        android:text="@string/main_settings"
         android:layout_height="wrap_content"
-        android:id="@+id/main_language"
+        android:id="@+id/main_settings"
         android:background="@color/colorPrimary"
         android:textSize="20sp"
         android:layout_alignBaseline="@+id/main_instructions"
