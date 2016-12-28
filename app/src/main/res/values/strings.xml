@@ -2,7 +2,7 @@
     <string name="app_name">SimonSays</string>
     <string name="instructions_title">Game instructions</string>
     <string name="game_title">Game Activity</string>
-    <string name="language_title">Choose language</string>
+    <string name="settings_title">Change application settings</string>
     <string name="language_successful_change">Language was successfully changed to English</string>
     <string name="main_exit">Exit</string>
     <string name="main_instructions">Instructions</string>
@@ -23,11 +23,16 @@
     <string name="game_won">You won</string>
     <string name="game_fail">You failed, try again</string>
     <string name="game_exit">Bye bye</string>
-    <string name="main_hello_message">Welcome. You are on main screen. Use gestures to navigate. Swipe left to listen game instructions. Swipe right to choose language. Swipe down to start game. Swipe up to leave application.</string>
+    <string name="main_hello_message">Welcome. You are on main screen. Use gestures to navigate. Swipe left to listen game instructions. Swipe right to manage application settings. Swipe down to start game. Swipe up to leave the application.</string>
     <string name="game_difficulty">Game difficulty changed to</string>
     <string name="game_difficulty_begginer">Beginner</string>
     <string name="game_difficulty_easy">Easy</string>
     <string name="game_difficulty_medium">Medium</string>
     <string name="game_difficulty_high">High</string>
     <string name="change_difficulty">Change game difficulty</string>
+    <string name="settings_hello_message">You are on settings screen. Use gestures to navigate. Swipe top to set language to Polish. Swipe down to change game difficulty. Swipe left to go back to main screen.</string>
+    <string name="game_hello_message">You are on game screen</string>
+    <string name="instructions_hello_message">You are on instructions screen. Use gestures to navigate. Swipe bottom to listen instructions. Swipe right to go back to main screen.</string>
+    <string name="instructions_content">The goal of the game for user is to repeat gestures sequence. Level number is equal to amount of gestures to repeat. With every level, user has to remember one additional gesture. It means that on every level user has to perform sequence from previous one and single new gesture. User can\'t start level until the entire sequence has been told, so he has to remember it.</string>
+    <string name="listen_instructions">Listen instructions</string>
 </resources>

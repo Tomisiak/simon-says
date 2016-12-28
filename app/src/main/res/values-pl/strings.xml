@@ -3,7 +3,7 @@
     <string name="app_name">SimonSays</string>
     <string name="game_title">Ekran gry z poleceniami do zapamiętania</string>
     <string name="instructions_title">Słowna instrukcja gry</string>
-    <string name="language_title">Wybierz język</string>
+    <string name="settings_title">Zmień ustawienia aplikacji</string>
     <string name="language_successful_change">Udało się zmienić język na polski</string>
     <string name="main_exit">Wyjście</string>
     <string name="main_instructions">Instrukcja</string>
@@ -11,7 +11,7 @@
     <string name="main_settings">Ustawienia</string>
     <string name="language_change">Zmień na angielski</string>
     <string name="app_back">Powrót</string>
-    <string name="gesture_long_press_back">Przytrzymaj aby wyjść</string>
+    <string name="gesture_long_press_back">Przytrzymaj, aby wyjść</string>
     <string name="gesture_swipe_left">Lewo</string>
     <string name="gesture_swipe_right">Prawo</string>
     <string name="gesture_swipe_up">Góra</string>
@@ -24,11 +24,16 @@
     <string name="game_won">wygrałeś</string>
     <string name="game_fail">przegrałeś, spróbuj ponownie</string>
     <string name="game_exit">Do zobaczenia!</string>
-    <string name="main_hello_message">Witaj. Znajdujesz się w ekranie głównym. Użyj gestów do nawigacji. Przesuń w lewo aby posłuchać instrukcji gry. W prawo aby zmienić język. W dół aby rozpocząć grę. W górę aby wyjść z aplikacji.</string>
+    <string name="main_hello_message">Witaj. Znajdujesz się w ekranie głównym. Użyj gestów do nawigacji. Przesuń w lewo aby posłuchać instrukcji gry. W prawo aby zarządzać ustawieniami aplikacji. W dół aby rozpocząć grę. W górę aby wyjść z aplikacji.</string>
     <string name="game_difficulty">Zmieniono poziom trudności na </string>
     <string name="game_difficulty_begginer">Początkujący</string>
     <string name="game_difficulty_easy">Łatwy</string>
     <string name="game_difficulty_medium">Średniozaawansowany</string>
     <string name="game_difficulty_high">Trudny</string>
     <string name="change_difficulty">Zmień poziom trudności</string>
+    <string name="settings_hello_message">Znajdujesz się w ekranie ustawień. Użyj gestów do nawigacji. Przesuń w górę aby ustawić język na angielski. W dół aby zmienić poziom trudności gry. W lewo aby powrócić do menu głównego.</string>
+    <string name="game_hello_message">Znajdujesz się w ekranie gry</string>
+    <string name="instructions_hello_message">Znajdujesz się w ekranie instrukcji. Użyj gestów do nawigacji. Przesuń w dół, aby wysłuchać instrukcji gry. Przesuń w prawo, aby powrócić do menu głównego.</string>
+    <string name="instructions_content">Celem gry jest powtarzanie sekwencji gestów przez użytkownika. Numer poziomu oznacza ilość gestów do powtórzenia. Z każdym poziomem gracz musi zapamiętać jeden dodatkowy gest. Oznacza to, że na każdym poziomie gracz musi wykonać sekwencję z poprzedniego oraz jeden nowy gest. Użytkownik nie może rozpocząć poziomu do momentu aż przedstawiona zostanie pełna sekwencja gestów, musi ją zapamiętać.</string>
+    <string name="listen_instructions">Wysłuchaj instrukcji</string>
 </resources>

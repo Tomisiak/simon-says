@@ -45,7 +45,7 @@ public class GameActivity extends AppCompatActivity {
                 if (status != TextToSpeech.ERROR) {
                     mTextToSpeech.setLanguage(new Locale(LocaleManager.getLanguage(GameActivity.this)));
                     ArrayList<String> toSpeak = new ArrayList<String>();
-                    toSpeak.add(getResources().getString(R.string.game_title));
+                    toSpeak.add(getResources().getString(R.string.game_hello_message));
                     toSpeak.add(getResources().getString(R.string.gesture_long_press_back));
 
                     for (String text : toSpeak) {

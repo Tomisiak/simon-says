@@ -7,27 +7,14 @@
     tools:context=".SettingsActivity">
 
     <TextView
-        android:text="@string/language_change"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/language_change"
-        android:background="@color/colorPrimary"
-        android:textSize="20sp"
-        android:textColor="@android:color/white"
-        android:textAlignment="center"
-        android:padding="5sp"
-        android:layout_marginTop="18dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:text="@string/language_title"
-        android:layout_width="wrap_content"
+        android:text="@string/settings_title"
+        android:layout_width="200sp"
         android:layout_height="wrap_content"
         android:id="@+id/language_title"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:textAlignment="center" />
 
     <TextView
         android:text="@string/app_back"
@@ -57,5 +44,21 @@
         android:padding="5sp"
         android:layout_marginBottom="30dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textAllCaps="true" />
+
+    <TextView
+        android:text="@string/language_change"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/language_change"
+        android:background="@color/colorPrimary"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"
+        android:textAlignment="center"
+        android:padding="5sp"
+        android:layout_marginTop="21dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textAllCaps="true" />
 </RelativeLayout>

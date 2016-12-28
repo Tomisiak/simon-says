@@ -39,7 +39,7 @@ public class SettingsActivity extends AppCompatActivity {
             public void onInit(int status) {
                 if (status != TextToSpeech.ERROR) {
                     mTextToSpeech.setLanguage(new Locale(LocaleManager.getLanguage(SettingsActivity.this)));
-                    String toSpeak = getResources().getString(R.string.language_title);
+                    String toSpeak = getResources().getString(R.string.settings_hello_message);
                     mTextToSpeech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
                 }
             }
@@ -96,7 +96,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void updateView() {
-        mTitleTextView.setText(R.string.language_title);
+        mTitleTextView.setText(R.string.settings_title);
         mChangeTextView.setText(R.string.language_change);
         mBackTextView.setText(R.string.app_back);
         mGameDifficultyTextView.setText(R.string.change_difficulty);
